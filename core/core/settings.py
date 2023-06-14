@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "drf_yasg",
     "corsheaders",
 ]
+# User Authentication Model
+AUTH_USER_MODEL = "application.CustomUser"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -61,6 +63,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
+
 
 TEMPLATES = [
     {
