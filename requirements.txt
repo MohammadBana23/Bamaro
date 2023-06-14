@@ -1,5 +1,38 @@
-asgiref==3.7.2
-Django==3.2.19
-pytz==2023.3
-sqlparse==0.4.4
-typing_extensions==4.6.3
+# general  modules
+django >3.2,<3.3
+Pillow
+djangorestframework
+
+# env controlls
+python-decouple
+
+# third party modules
+markdown       
+django-filter  
+drf-yasg
+drf-yasg[validation]
+djangorestframework-simplejwt
+django-cors-headers
+django-csp
+django-robots
+django-debug-toolbar
+django-elasticsearch-dsl-drf
+
+# deployment module
+gunicorn
+
+# refactoring and tests
+black
+flake8
+pytest
+mock
+pytest-django
+Faker
+drf_spectacular
+
+# database client
+psycopg2-binary
+
+django-sslserver
+
+python-dateutil
