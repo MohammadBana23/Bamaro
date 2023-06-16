@@ -71,8 +71,6 @@ class SignupSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(TokenObtainPairSerializer):
     def __init__(self, *args, **kwargs):
-        # changing the default username field to phone_or_email
-        self.username_field = "email"
         return super().__init__(*args, **kwargs)
 
     def validate(self, attrs):
@@ -122,7 +120,32 @@ class LoginSerializer(TokenObtainPairSerializer):
 
         data = {"refresh": str(refresh), "access": str(refresh.access_token)}
         return data
+    
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = [
+            "pk",
+            "phone",
+            "email",
+            "username",
+            "age",
+        ]
+        read_only_fields = ["is_verified"]
+
+    def get_phone(self, obj):
+        return str(obj.phone)
+
+    def get_email(self, obj):
+        return str(obj.email)
+
+    def to_representation(self, instance):
+        # add percentage to other representation fields
+        data = super().to_representation(instance)
+        data["age"] = instance.age
+        return data
+    
 
 """Functions"""
 def generate_JWT_access_refresh_token(user):
@@ -139,3 +162,4 @@ def validate_email(value):
         return "E"
     else:
         return "Error"
+    
