@@ -24,9 +24,9 @@ from django.conf.urls.static import static
 """Swagger Configurations"""
 schema_view = get_schema_view(
     openapi.Info(
-        title="payesh",
+        title="Bamaro",
         default_version="v1",
-        description="api documentation for payesh",
+        description="api documentation for bamaro",
         terms_of_service="https://www.google.com/policies/terms/",
         license=openapi.License(name="MIT License"),
     ),

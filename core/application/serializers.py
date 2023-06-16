@@ -9,6 +9,7 @@ from .models import CustomUser
 from .api import CustomException
 
 class SignupSerializer(serializers.ModelSerializer):
+    password2 = serializers.CharField(max_length=255, required=True)
     
     class Meta:
         model = CustomUser
@@ -58,13 +59,9 @@ class SignupSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = CustomUser.objects.create_user(
             email=validated_data["email"],
+            username=validated_data["username"],    
             password=validated_data["password"],
         )
-
-        # get the profile of user and attach fullname to it
-        # user_profile = UserDetail.objects.get(user=user)
-        # user_profile.fullname = validated_data["fullname"]
-        # user_profile.save()
 
         # get access and refresh
         data = generate_JWT_access_refresh_token(user)
@@ -108,7 +105,7 @@ class LoginSerializer(TokenObtainPairSerializer):
         # authenticating user
         # authenticate function will return None
         # if user.is_active equals to false
-        user = authenticate(username=user.username, password=attrs["password"])
+        user = authenticate(email=attrs["email"], password=attrs["password"])
 
         # is user password be incorrect, raise an exception
         try:
@@ -137,7 +134,6 @@ def generate_JWT_access_refresh_token(user):
     return data
 
 def validate_email(value):
-
     if search(r"^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$", value):
         return "E"
     else:
