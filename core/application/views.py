@@ -2,9 +2,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import SignupSerializer, LoginSerializer , ProfileSerializer
+from .serializers import SignupSerializer, LoginSerializer , ProfileSerializer , TravelSerializer
 from rest_framework.views import APIView
-from .models import CustomUser
+from .models import CustomUser , Travel
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from .api import CustomException
@@ -69,6 +69,13 @@ class ProfileView(GenericAPIView):
     #     serializer.is_valid(raise_exception=True)
     #     serializer.save()
     #     return Response(serializer.data, status=status.HTTP_200_OK)
+class TravelView(GenericAPIView):
+    serializer_class = TravelSerializer
+    
+    def get(self , request):
+        queryset = Travel.objects.all()
+        serializer = self.serializer_class(queryset , many=True)
+        return Response(serializer.data , status = status.HTTP_200_OK)
 
 # class UserNameView(APIView):
 #     def get(self, request, *args, **kwargs):

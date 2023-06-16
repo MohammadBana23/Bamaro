@@ -5,7 +5,7 @@ from rest_framework import serializers, status
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth.password_validation import validate_password
-from .models import CustomUser
+from .models import CustomUser , Travel
 from .api import CustomException
 
 class SignupSerializer(serializers.ModelSerializer):
@@ -145,7 +145,11 @@ class ProfileSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         data["age"] = instance.age
         return data
-    
+
+class TravelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Travel
+        fields = ['id' , 'title' , 'content' , 'price' , 'image']
 
 """Functions"""
 def generate_JWT_access_refresh_token(user):
