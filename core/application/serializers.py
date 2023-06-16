@@ -59,7 +59,8 @@ class SignupSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = CustomUser.objects.create_user(
             email=validated_data["email"],
-            username=validated_data["username"],    
+            username=validated_data["username"],
+            phone="09111111111",    
             password=validated_data["password"],
         )
 
