@@ -10,6 +10,7 @@ class UserAdmin(BaseUserAdmin):
         "email",
         "phone",
         "username",
+        "birthdate",
         "is_active",
         "is_staff",
         "is_superuser",
@@ -21,7 +22,7 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ("email", "phone", "username")
     ordering = ("created_at", "updated_at", "id")
     fieldsets = (
-        ("Authentication", {"fields": ("email", "phone", "username", "password")}),
+        ("Authentication", {"fields": ("email", "phone", "username", "password" , "birthdate")}),
         (
             "Permissions",
             {"fields": ("is_superuser", "is_staff", "is_active", "is_verified")},
