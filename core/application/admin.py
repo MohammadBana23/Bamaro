@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import CustomUser
+from .models import CustomUser , Travel
 
 
 class UserAdmin(BaseUserAdmin):
@@ -38,5 +38,26 @@ class UserAdmin(BaseUserAdmin):
         ),
     )
 
-
 admin.site.register(CustomUser, UserAdmin)
+
+
+class TravelAdmin(admin.ModelAdmin):
+    list_display = [
+        "id",
+        "title",
+        "content",
+        "price",
+        "image",
+        "created_at",
+        "updated_at",
+    ]
+    list_filter = ["title", "content", "price"]
+    search_fields = [
+        "title",
+        "content",
+    ]
+    ordering = ["id", "created_at", "updated_at"]
+
+
+admin.site.register(Travel, TravelAdmin)
+

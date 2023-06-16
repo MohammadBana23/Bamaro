@@ -32,3 +32,15 @@ class CustomUser(AbstractUser):
                 - ((today.month, today.day) < (self.birthdate.month, self.birthdate.day))
             )
             return age
+        
+class Travel(models.Model):
+    title = models.CharField(max_length=50)
+    content = models.CharField(max_length=255)
+    price = models.IntegerField(default=0)
+    image = models.ImageField(upload_to="country/")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.title
