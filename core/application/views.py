@@ -61,14 +61,6 @@ class ProfileView(GenericAPIView):
         serializer = self.serializer_class(query)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    # def put(self, request, *args, **kwargs):
-    #     if request.resolver_match.url_name != "profile-authorized": 
-    #         return self.http_method_not_allowed(request, *args, **kwargs)
-    #     query = self.get_queryset(username=request.user.username)
-    #     serializer = self.serializer_class(query, data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-    #     return Response(serializer.data, status=status.HTTP_200_OK)
 class TravelView(GenericAPIView):
     serializer_class = TravelSerializer
     
