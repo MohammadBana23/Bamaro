@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-pk-!#5y&bqhj1o*3+_2hwp0ezdov$ob&)g87b@szh($f&l%1r!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 # Application definition
 INSTALLED_APPS = [
@@ -87,9 +87,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    
+    "default": {
+        "ENGINE": config("DB_ENGINE", default="django.db.backends.postgresql"),
+        "NAME": config("DB_NAME", default="Goodopet_db"),
+        "USER": config("DB_USER", default="postgres"),
+        "PASSWORD": config("DB_PASS", default="hZmoVFq0irs3gFowHpyO2coID8da2Oer"),
+        "HOST": config("DB_HOST", default="goodopet-dev-postgresql"),
+        "PORT": config("DB_PORT", cast=int, default=5432),
     }
 }
 
