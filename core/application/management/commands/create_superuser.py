@@ -8,7 +8,7 @@ class Command(BaseCommand):
     
     def __init__(self, *args, **kwargs):
         super(Command, self).__init__(*args, **kwargs)
-        self.fake = Faker("fa_IR")
+        self.fake = Faker()
     
     def handle(self, *args, **options):
         if not CustomUser.objects.filter(is_superuser=True).exists():
